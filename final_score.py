@@ -11,9 +11,16 @@ from skillNer.general_params import SKILL_DB
 from skillNer.skill_extractor_class import SkillExtractor
 from spacy.matcher import PhraseMatcher
 
+
+# Use safe fallback if no GPU is available
 device = "cuda" if torch.cuda.is_available() else "cpu"
-model = SentenceTransformer('BAAI/bge-base-en-v1.5')
-model = model.to(device)
+
+# Load model *without* moving it manually to a device
+model = SentenceTransformer('BAAI/bge-base-en-v1.5')  # Don't call `.to()` manually
+
+# Only manually move the model if using local environment with a known compatible setup
+if device == "cuda":
+    model = model.to(device)
 
 nlp = spacy.load("en_core_web_lg")
 skill_extractor = SkillExtractor(nlp, SKILL_DB, PhraseMatcher)
