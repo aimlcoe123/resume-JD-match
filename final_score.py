@@ -1,18 +1,19 @@
 import os
 import re
-import tempfile
 import fitz
 import numpy as np
+import torch
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sentence_transformers import SentenceTransformer, util
 from sklearn.metrics.pairwise import cosine_similarity
-from docx import Document
 import spacy
 from skillNer.general_params import SKILL_DB
 from skillNer.skill_extractor_class import SkillExtractor
 from spacy.matcher import PhraseMatcher
 
-model = SentenceTransformer('BAAI/bge-base-en-v1.5', device='gpu')
+device = "cuda" if torch.cuda.is_available() else "cpu"
+model = SentenceTransformer('BAAI/bge-base-en-v1.5')
+model = model.to(device)
 
 nlp = spacy.load("en_core_web_lg")
 skill_extractor = SkillExtractor(nlp, SKILL_DB, PhraseMatcher)
