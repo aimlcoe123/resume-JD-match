@@ -1,7 +1,6 @@
 import streamlit as st
 from PIL import Image
 import pandas as pd
-from sentence_transformers import SentenceTransformer
 from final_score import (
     extract_text, preprocess, extract_skills_from_jd,
     detect_domain, hybrid_score, extract_skills_from_resume
@@ -10,8 +9,6 @@ from st_aggrid import AgGrid, GridOptionsBuilder
 import base64
 from io import BytesIO
 
-# Load model
-model = SentenceTransformer('all-MiniLM-L6-v2')
 
 # Logo setup
 logo = Image.open("image.png")
@@ -118,7 +115,7 @@ else:
         resume_skills = extract_skills_from_resume(resume_text_clean)
         resume_domain = detect_domain(resume_text_clean)
 
-        hybrid, sem, kw, skill_overlap = hybrid_score(jd_text_clean, resume_text_clean, model, jd_skills)
+        hybrid, sem, kw, skill_overlap = hybrid_score(jd_text_clean, resume_text_clean, jd_skills)
 
         def highlight_missing_skills(jd_skills, resume_skills):
             jd_skills_lower = {skill.lower() for skill in jd_skills}

@@ -82,7 +82,7 @@ def compute_skill_overlap(jd_text, resume_text, keyword_list):
     return len(matches) / len(keyword_list) if keyword_list else 0.0
 
 # === 7. Hybrid Scoring Function ===
-def hybrid_score(jd_text, resume_text, model, keyword_list, semantic_weight=0.6):
+def hybrid_score(jd_text, resume_text, keyword_list):
     semantic_part = semantic_score(jd_text, resume_text)
     keyword_part = keyword_score(jd_text, resume_text)
     skill_overlap_part = compute_skill_overlap(jd_text, resume_text, keyword_list)
