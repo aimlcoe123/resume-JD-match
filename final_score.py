@@ -12,7 +12,7 @@ from skillNer.general_params import SKILL_DB
 from skillNer.skill_extractor_class import SkillExtractor
 from spacy.matcher import PhraseMatcher
 
-model = SentenceTransformer('BAAI/bge-base-en-v1.5')
+model = SentenceTransformer('BAAI/bge-base-en-v1.5', device='cpu')
 
 nlp = spacy.load("en_core_web_lg")
 skill_extractor = SkillExtractor(nlp, SKILL_DB, PhraseMatcher)
