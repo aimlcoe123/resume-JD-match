@@ -11,8 +11,8 @@ from skillNer.general_params import SKILL_DB
 from skillNer.skill_extractor_class import SkillExtractor
 from spacy.matcher import PhraseMatcher
 
-model = SentenceTransformer('all-MiniLM-L6-v2')
-model = model.to('cpu')
+model = SentenceTransformer('paraphrase-MiniLM-L3-v2', device='cpu')
+
 
 nlp = spacy.load("en_core_web_lg")
 skill_extractor = SkillExtractor(nlp, SKILL_DB, PhraseMatcher)
