@@ -67,5 +67,4 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'resume-jd-match'
-          slot-name: 'production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D8F2D7009BE548A59EC2C87EA7A5DF38 }}
